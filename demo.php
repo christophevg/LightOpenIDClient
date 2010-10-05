@@ -6,10 +6,19 @@
 
 include_once 'LightOpenIDClient.php'; // this will also include LightOpenID
 
-// get an instance of the client and set some requirements
+// start a session to cache user's info
+session_start();
+
+// get an instance of the client and configure it
 $openid = LightOpenIDClient::getInstance()
             ->withRequired( 'namePerson/friendly', 'contact/email' )
             ->withOptional( 'namePerson/first' )
+            ->cacheInSession();
+
+// handle optionally a log off event and pass it on to the OpenID client
+if( isset($_GET['action']) && $_GET['action'] == 'logoff' ) {
+  $openid->logoff();
+}
 
 // try to retrieve an authenticated user              
 if( $user = $openid->getUser() ) { 

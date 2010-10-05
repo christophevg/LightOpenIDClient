@@ -13,6 +13,8 @@ include_once dirname(__FILE__) . '/lightopenid/openid.php';
 
 class LightOpenIDClient {
   private $openid;
+  private $cacheInSession = false;
+
   private static $instance;
   
   public static function getInstance() {
@@ -50,8 +52,39 @@ class LightOpenIDClient {
     $this->openid->optional = func_get_args();
     return $this;
   }
+  
+  public function cacheInSession() {
+    $this->cacheInSession = true;
+    return $this;
+  }
 
+  public function logoff() {
+    if( $this->cacheInSession ) {
+      unset( $_SESSION['LightOpenIDUser'] );
+    }
+  }
+  
   public function getUser() {
+    if( $user = $this->getUserFromSession() ) { return $user; }
+    return $this->cache( $this->getUserFromLogin() );
+  }
+  
+  private function getUserFromSession() {
+    if( $this->cacheInSession ) {
+      if( isset($_SESSION['LightOpenIDUser']) ) {
+        return $_SESSION['LightOpenIDUser'];
+      }
+    }
+  }
+  
+  private function cache( $user ) {
+    if( $this->cacheInSession ) {
+      $_SESSION['LightOpenIDUser'] = $user;
+    }
+    return $user;
+  }
+  
+  private function getUserFromLogin() {
     $this->handleLoginRequest();
     
     global $_GET;
