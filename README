@@ -14,3 +14,6 @@ $ git submodule update
 
 Now you are ready to take a look at the demo.php page to see how it simplifies
 using LightOpenID - I hope ;-)
+
+All credits go to Mewp for his great work on LightOpenID.
+See: http://gitorious.org/lightopenid for more info.
