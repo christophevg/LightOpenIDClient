@@ -13,11 +13,15 @@ $openid = LightOpenIDClient::getInstance()
 
 // try to retrieve an authenticated user              
 if( $user = $openid->getUser() ) { 
-
-  print "<pre>"; 
-  print_r( $user ); 
-  print "</pre>";
-  print '<a href="demo.php">login</a>';
+  print <<<EOT
+  identity: $user->identity<br> 
+  email : $user->email<br>
+  nickname : $user->nick<br>
+  first name : $user->firstName<br>
+  <br>
+  <a href="demo.php">refresh</a> | 
+  <a href="demo.php?action=logoff">log off</a>
+EOT;
 
 } else { // present a login form
 
