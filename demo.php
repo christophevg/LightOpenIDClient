@@ -39,7 +39,8 @@ EOT;
     var openid = {
       config : { 
         google   : 'https://www.google.com/accounts/o8/id',
-        myopenid : 'http://myopenid.com'
+        myopenid : 'http://myopenid.com',
+        yahoo    : 'http://me.yahoo.com'
       },
       signin : function(provider) {
         document.getElementById('openid').value = this.config[provider];
@@ -51,6 +52,7 @@ EOT;
     <h3>Login using one of these OpenID Providers:</h3>
     <a href="#" onclick="openid.signin('google');">Google</a>
     <a href="#" onclick="openid.signin('myopenid');">MyOpenID</a>
+    <a href="#" onclick="openid.signin('yahoo');">Yahoo</a>
 
     <h3>or enter your OpenID manually...</h3>
     <form id="openidForm" action="" method="post">
