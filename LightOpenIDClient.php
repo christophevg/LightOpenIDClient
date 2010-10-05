@@ -9,7 +9,7 @@
  * @author Christophe VG
  */
 
-include_once 'lightopenid/openid.php';
+include_once dirname(__FILE__) . '/lightopenid/openid.php';
 
 class LightOpenIDClient {
   private $openid;
