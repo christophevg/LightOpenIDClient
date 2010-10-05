@@ -1,0 +1,16 @@
+LightOpenIDClient
+
+Finally I found a "Light"-weight "OpenID" implementation in PHP, I just didn't
+like its interface (really no offense, it's just a thing I have). So what do 
+you do? Create a little client interface around it and push it to GitHub.
+
+LightOpenID is hosted on Gitorious and is here included as a Git submodule. 
+Minimal survival steps:
+
+$ git clone http://github.com/christophevg/LightOpenIDClient.git LightOpenIDClient
+$ cd LightOpenIDClient
+$ git submodule init
+$ git submodule update
+
+Now you are ready to take a look at the demo.php page to see how it simplifies
+using LightOpenID - I hope ;-)
