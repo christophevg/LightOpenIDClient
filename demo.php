@@ -8,8 +8,8 @@ include_once 'LightOpenIDClient.php'; // this will also include LightOpenID
 
 // get an instance of the client and set some requirements
 $openid = LightOpenIDClient::getInstance()
-            ->withRequired( array('namePerson/friendly', 'contact/email') )
-            ->withOptional( array('namePerson/first') );
+            ->withRequired( 'namePerson/friendly', 'contact/email' )
+            ->withOptional( 'namePerson/first' )
 
 // try to retrieve an authenticated user              
 if( $user = $openid->getUser() ) { 

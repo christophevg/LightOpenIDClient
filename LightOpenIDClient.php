@@ -41,13 +41,13 @@ class LightOpenIDClient {
     }
   }
   
-  public function withRequired( $requiredInfo ) {
-    $this->openid->required = $requiredInfo;
+  public function withRequired() {
+    $this->openid->required = func_get_args();
     return $this;
   }
   
-  public function withOptional( $optionalInfo ) {
-    $this->openid->optional = $optionalInfo;      
+  public function withOptional() {
+    $this->openid->optional = func_get_args();
     return $this;
   }
 
