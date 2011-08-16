@@ -24,8 +24,9 @@ class LightOpenIDClient {
     return self::$instance;
   }
 
-  private function __construct() {
-    $this->openid = new LightOpenID();
+  private function __construct($hostname = null) {
+    if( is_null( $hostname ) ) { $hostname = $_SERVER['SERVER_NAME']; }
+    $this->openid = new LightOpenID($hostname);
   }
 
   private function handleLoginRequest() {
