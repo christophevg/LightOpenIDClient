@@ -15,17 +15,17 @@ class LightOpenIDClient {
   private $openid;
   private $cacheInSession = false;
 
-  private static $instance;
+  private static $instances = array();
   
-  public static function getInstance() {
-    if( ! self::$instance ) {
-      self::$instance = new LightOpenIDClient();
+  public static function getInstance($hostname = null) {
+    if( is_null( $hostname ) ) { $hostname = $_SERVER['SERVER_NAME']; }
+    if( ! array_key_exists( $hostname, self::$instances ) ) {
+      self::$instances[$hostname] = new LightOpenIDClient($hostname);
     }
-    return self::$instance;
+    return self::$instances[$hostname];
   }
 
-  private function __construct($hostname = null) {
-    if( is_null( $hostname ) ) { $hostname = $_SERVER['SERVER_NAME']; }
+  private function __construct($hostname) {
     $this->openid = new LightOpenID($hostname);
   }
 
